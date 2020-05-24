@@ -2,7 +2,6 @@
   <div id="covidAnalysis">
     <br>
     <country-select className="select-css" v-model="query.country" :country="query.country"/>
-    <region-select className="select-css" v-model="query.region" :country="query.country" :region="query.region" />
     <button @click="show">Click</button>
 
     <GChart
@@ -25,8 +24,7 @@ export default {
     return {
       on: false,
       query: {
-        country: 'AU',
-        region: '',
+        country: 'AU'
       },
       url: urlBase,
       chart: {
@@ -92,9 +90,15 @@ export default {
   // },
   methods: {
     show() {
-      console.log("showing")
-      console.log(this.query.country)
-      console.log(this.query.region)
+      // const key = { "Content-Type": "application/json;charset=utf-8",
+      //   "x-api-key": LNkCeQjNcS9uWxrLVPlUnaGu1P41bRyYaEbDy7ha };
+      this.$http.get("https://4prxbmd4q6.execute-api.us-east-1.amazonaws.com/development/Australia?date=01-02-20").then(response => {
+
+        console.log(response);
+
+      }, response => {
+        // error callback
+      });
     }
   }
 
